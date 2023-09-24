@@ -1,39 +1,41 @@
+# docker-compose.production.yml
 version: '3'
 
 volumes:
-  pg_data_kittygram:
+  pg_data_production:
   static_kittygram:
   media_kittygram:
 
 services:
   db:
     image: postgres:13.10
-    volumes:
-      - pg_data:/var/lib/postgresql/data
-
-  backend:
-    build: ./backend/
     env_file: .env
     volumes:
-      - static_kittygram:/backend_static/
+      - pg_data_production:/var/lib/postgresql/data
+  
+  backend:
+    image: viadolorosa/kittygram_backend:latest
+    env_file: .env
+    volumes:
+      - static_kittygram:/backend_static
       - media_kittygram:/media/
     depends_on:
       - db
-
+  
   frontend:
+    image: viadolorosa/kittygram_frontend:latest
     env_file: .env
-    build: ./frontend/
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_kittygram:/frontend_static
-
+  
   gateway:
-    build: ./nginx/
+    image: viadolorosa/kittygram_gateway:latest
     env_file: .env
+    volumes:
+      - static_kittygram:/staticfiles/
+      - media_kittygram:/media/
     ports:
       - 9000:80
-    volumes:
-      - static_kittygram:/staticfiles
-      - media_kittygram:/media/
     depends_on:
       - backend
