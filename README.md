@@ -24,7 +24,7 @@ cd ../nginx
 docker build -t YOUR_USERNAME/kittygram_gateway . 
 ```
 
-Загрузите образы на DockerHub:
+#### Загрузите образы на DockerHub:
 
 ```
 docker push YOUR_USERNAME/kittygram_frontend
@@ -32,7 +32,7 @@ docker push YOUR_USERNAME/kittygram_backend
 docker push YOUR_USERNAME/kittygram_gateway
 ```
 
-Установите Docker Compose:
+#### Установите Docker Compose:
 
 ```
 sudo apt update
@@ -42,11 +42,11 @@ sudo sh ./get-docker.sh
 sudo apt-get install docker-compose-plugin
 ```
 
-Запустите Docker Compose с этой конфигурацией на своём компьютере:
+#### Запустите Docker Compose с этой конфигурацией на своём компьютере:
 ```
 docker compose -f docker-compose.production.yml up
 ```
-Сразу же соберите статику, примените миграции:
+#### Сразу же соберите статику, примените миграции:
 
 ```
 docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
@@ -58,12 +58,12 @@ docker compose -f docker-compose.production.yml exec backend python manage.py mi
 http://localhost:9000/
 ```
 ### Запуск на удаленном сервере:
-Подключитесь к вашему удалённому серверу:
+#### Подключитесь к вашему удалённому серверу:
 
 ```
 ssh -i путь_до_файла_с_SSH_ключом/название_файла_с_SSH_ключом имя_пользователя@ip_адрес_сервера
 ```
-Установите Docker Compose:
+#### Установите Docker Compose:
 
 ```
 sudo apt update
@@ -73,17 +73,17 @@ sudo sh ./get-docker.sh
 sudo apt-get install docker-compose-plugin
 ```
 
-Создайте на сервере директорию kittygram через терминал:
+#### Создайте на сервере директорию kittygram через терминал:
 
 ```
 mkdir kittygram
 ```
-В директорию kittygram/ скопируйте файлы docker-compose.production.yml и .env:
+#### В директорию kittygram/ скопируйте файлы docker-compose.production.yml и .env:
 
 ```
 scp -i path_to_SSH/SSH_name docker-compose.production.yml username@server_ip:/home/username/kittygram/docker-compose.production.yml
 ```
-Для запуска Docker Compose в режиме демона команду docker compose up нужно запустить с флагом -d. Выполните эту команду на сервере в папке kittygram/:
+#### Для запуска Docker Compose в режиме демона команду docker compose up нужно запустить с флагом -d. Выполните эту команду на сервере в папке kittygram/:
 ```
 sudo docker compose -f docker-compose.production.yml up -d
 ```
@@ -91,20 +91,19 @@ sudo docker compose -f docker-compose.production.yml up -d
 ```
 sudo docker compose -f docker-compose.production.yml ps
 ```
-Выполните миграции, соберите статические файлы бэкенда и скопируйте их в /backend_static/static/:
+#### Выполните миграции, соберите статические файлы бэкенда и скопируйте их в /backend_static/static/:
 ```
 sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
 sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
 sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
 ```
-На сервере в редакторе nano откройте конфиг Nginx:
+#### На сервере в редакторе nano откройте конфиг Nginx:
 
-    ```bash
-    sudo nano /etc/nginx/sites-enabled/default
-   
-    ```
+```
+sudo nano /etc/nginx/sites-enabled/default
+```
 
-Измените настройки location в секции server:
+#### Измените настройки location в секции server:
 
 ```
     location / {
@@ -113,7 +112,7 @@ sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/col
     }
 ```
 
-Проверьте работоспособность конфигураций и перезапустите Nginx:
+#### Проверьте работоспособность конфигураций и перезапустите Nginx:
 
 ```
 sudo nginx -t 
