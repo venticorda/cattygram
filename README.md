@@ -7,7 +7,7 @@ Cattygram — социальная сеть для обмена фотограф
 ### Запуск локально:
 #### Клонируйте репозиторий:
 ```
-git clone git@github.com:ViaDo1orosa/cattygram.git
+git clone git@github.com:venticorda/cattygram.git
 ```
 Создайте файл `.env` и заполните его своими данными. Все необходимые переменные перечислены в файле `.env.example`, находящемся в корневой директории проекта.
 
@@ -132,4 +132,4 @@ sudo service nginx reload
 - Git 
 
 ### Автор: 
-[Даниил Варлащенко](https://github.com/ViaDo1orosa)
+[Даниил Варлащенко](https://github.com/venticorda)
