@@ -1,13 +1,13 @@
 # Cattygram 
 
 ## Описание проекта:
-Kittygram — социальная сеть для обмена фотографиями любимых питомцев.
+Cattygram — социальная сеть для обмена фотографиями любимых питомцев.
 
 ## Инструкция по запуску:
 ### Запуск локально:
 #### Клонируйте репозиторий:
 ```
-git clone git@github.com:ViaDo1orosa/kittygram_final.git
+git clone git@github.com:ViaDo1orosa/cattygram.git
 ```
 Создайте файл `.env` и заполните его своими данными. Все необходимые переменные перечислены в файле `.env.example`, находящемся в корневой директории проекта.
 
@@ -17,19 +17,19 @@ git clone git@github.com:ViaDo1orosa/kittygram_final.git
 
 ```
 cd frontend
-docker build -t YOUR_USERNAME/kittygram_frontend .
+docker build -t YOUR_USERNAME/cattygram_frontend .
 cd ../backend
-docker build -t YOUR_USERNAME/kittygram_backend .
+docker build -t YOUR_USERNAME/cattygram_backend .
 cd ../nginx
-docker build -t YOUR_USERNAME/kittygram_gateway . 
+docker build -t YOUR_USERNAME/cattygram_gateway . 
 ```
 
 #### Загрузите образы на DockerHub:
 
 ```
-docker push YOUR_USERNAME/kittygram_frontend
-docker push YOUR_USERNAME/kittygram_backend
-docker push YOUR_USERNAME/kittygram_gateway
+docker push YOUR_USERNAME/cattygram_frontend
+docker push YOUR_USERNAME/cattygram_backend
+docker push YOUR_USERNAME/cattygram_gateway
 ```
 
 #### Установите Docker Compose:
@@ -73,17 +73,17 @@ sudo sh ./get-docker.sh
 sudo apt-get install docker-compose-plugin
 ```
 
-#### Создайте на сервере директорию kittygram через терминал:
+#### Создайте на сервере директорию cattygram через терминал:
 
 ```
-mkdir kittygram
+mkdir cattygram
 ```
-#### В директорию kittygram/ скопируйте файлы docker-compose.production.yml и .env:
+#### В директорию cattygram/ скопируйте файлы docker-compose.production.yml и .env:
 
 ```
-scp -i path_to_SSH/SSH_name docker-compose.production.yml username@server_ip:/home/username/kittygram/docker-compose.production.yml
+scp -i path_to_SSH/SSH_name docker-compose.production.yml username@server_ip:/home/username/cattygram/docker-compose.production.yml
 ```
-#### Для запуска Docker Compose в режиме демона команду docker compose up нужно запустить с флагом -d. Выполните эту команду на сервере в папке kittygram/:
+#### Для запуска Docker Compose в режиме демона команду docker compose up нужно запустить с флагом -d. Выполните эту команду на сервере в папке cattygram/:
 ```
 sudo docker compose -f docker-compose.production.yml up -d
 ```
