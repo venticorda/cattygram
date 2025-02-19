@@ -1,4 +1,4 @@
-name: Main Kittygram workflow
+name: Main cattygram workflow
 
 on:
   push:
@@ -61,7 +61,7 @@ jobs:
         with:
           context: ./backend/
           push: true
-          tags: viadolorosa/kittygram_backend:latest
+          tags: venticorda/cattygram_backend:latest
   frontend_tests:
     runs-on: ubuntu-latest
 
@@ -100,7 +100,7 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: viadolorosa/kittygram_frontend:latest
+          tags: venticorda/cattygram_frontend:latest
   build_gateway_and_push_to_docker_hub:
     name: Push gateway Docker image to DockerHub
     runs-on: ubuntu-latest
@@ -119,7 +119,7 @@ jobs:
         with:
           context: ./nginx/
           push: true
-          tags: viadolorosa/kittygram_gateway:latest
+          tags: venticorda/cattygram_gateway:latest
   deploy:
     runs-on: ubuntu-latest
     needs: 
@@ -137,7 +137,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         source: "docker-compose.production.yml"
-        target: "kittygram"
+        target: "cattygram"
     - name: Executing remote ssh commands to deploy
       uses: appleboy/ssh-action@master
       with:
@@ -146,7 +146,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
-          cd kittygram
+          cd cattygram
           sudo docker compose -f docker-compose.production.yml pull
           sudo docker compose -f docker-compose.production.yml down
           sudo docker compose -f docker-compose.production.yml up -d

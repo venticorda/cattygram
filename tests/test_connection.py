@@ -67,13 +67,13 @@ def test_link_connection(
     link = _get_validated_link(deploy_file_info, deploy_info_file_content,
                                link_key)
     response = _make_safe_request(link)
-    cats_project_name = 'Kittygram'
+    cats_project_name = 'cattygram'
     taski_project_name = 'Taski'
     assert_msg_template = (
         f'Убедитесь, что по ссылке `{link}` доступен проект '
         '`{project_name}`.'
     )
-    if link_key == 'kittygram_domain':
+    if link_key == 'cattygram_domain':
         assert cats_project_name in response.text, (
             assert_msg_template.format(project_name=cats_project_name)
         )
@@ -94,12 +94,12 @@ def test_link_connection(
 def test_projects_on_same_ip(
         deploy_file_info: tuple[Path, str],
         deploy_info_file_content: dict[str, str],
-        kittygram_link_key: str, taski_link_key: str
+        cattygram_link_key: str, taski_link_key: str
 ) -> None:
     links = [
         _get_validated_link(deploy_file_info, deploy_info_file_content,
                             link_key)
-        for link_key in (kittygram_link_key, taski_link_key)
+        for link_key in (cattygram_link_key, taski_link_key)
     ]
     responses = [_make_safe_request(link, stream=True) for link in links]
     ips = [
@@ -112,42 +112,42 @@ def test_projects_on_same_ip(
     )
 
 
-def test_kittygram_static_is_available(
+def test_cattygram_static_is_available(
         deploy_file_info: tuple[Path, str],
         deploy_info_file_content: dict[str, str],
-        kittygram_link_key: str
+        cattygram_link_key: str
 ) -> None:
     link = _get_validated_link(deploy_file_info, deploy_info_file_content,
-                               kittygram_link_key)
+                               cattygram_link_key)
     response = _make_safe_request(link)
 
     js_link = _get_js_link(response)
     assert js_link, (
-        'Проверьте, что проект `Kittygram` настроен корректно. '
+        'Проверьте, что проект `cattygram` настроен корректно. '
         f'В ответе на запрос к `{link}` не обнаружена ссылка на '
         'JavaScript-файл.'
     )
 
-    assert_msg = 'Убедитесь, что статические файлы для `Kittygram` доступны.'
+    assert_msg = 'Убедитесь, что статические файлы для `cattygram` доступны.'
     js_link_response = requests.get(f'{link}/{js_link}')
     expected_status = HTTPStatus.OK
     assert js_link_response.status_code == expected_status, assert_msg
 
 
-def test_kittygram_api_available(
+def test_cattygram_api_available(
         deploy_file_info: tuple[Path, str],
         deploy_info_file_content: dict[str, str],
-        kittygram_link_key: str
+        cattygram_link_key: str
 ) -> None:
     link = _get_validated_link(deploy_file_info, deploy_info_file_content,
-                               kittygram_link_key)
+                               cattygram_link_key)
     signup_link = f'{link}/api/users/'
     form_data = {
         'username': 'newuser',
         'password': ''
     }
     assert_msg = (
-        'Убедитесь, что API проекта `Kittygram` доступен по ссылке формата '
+        'Убедитесь, что API проекта `cattygram` доступен по ссылке формата '
         f'`{link}/api/...`.'
     )
     try:

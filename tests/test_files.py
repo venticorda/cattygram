@@ -54,7 +54,7 @@ def test_backend_dokerfile_content(backend_dir_info: tuple[Path, str],
     for keyword in expected_keywords:
         assert keyword in dockerfile_content.lower(), (
             f'Убедитесь, что настроили {dockerfile_name} для образа '
-            '`kittygram_backend`.'
+            '`cattygram_backend`.'
         )
 
 
@@ -76,7 +76,7 @@ def test_workflow_file(base_dir: Path, workflow_file_name: str):
     path_to_file = base_dir / workflow_file_name
     assert path_to_file.is_file(), (
         f'Убедитесь, что корневая директория проекта содержит файл '
-        f'`{workflow_file_name}`, в котором описан workflow для Kittygram.'
+        f'`{workflow_file_name}`, в котором описан workflow для cattygram.'
     )
     workflow = safely_load_yaml_file(path_to_file)
     assert workflow, (
